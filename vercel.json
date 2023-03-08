@@ -1,4 +1,10 @@
 {
+    "rewrites": [
+        { "source": "/episodios/(.*)", "destination": "/episodios" },
+        { "source": "/api/(.*)", "destination": "/api" }]
+}
+
+{
     "version": 2,
     "builds": [
       {
@@ -10,6 +16,15 @@
       {
         "src": "/(.*)",
         "dest": "index.js"
-      }
+      },
+      {
+        "src": "/episodios/(.*)",
+        "dest": "/api/index.js"
+      },
+      {
+        "src": "/api/(.*)",
+        "dest": "/api/index.js"
+      },
+
     ]
   }
