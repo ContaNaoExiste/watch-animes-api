@@ -13,7 +13,7 @@
       },
       {
         "src": "/episodios/(.*)",
-        "dest": "/api/index.js"
+        "dest": "/episodios/index.js"
       },
       {
         "src": "/api/(.*)",

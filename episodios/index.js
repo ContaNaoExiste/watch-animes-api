@@ -65,12 +65,6 @@ app.get('/episodios', (req, res) => {
     res.setHeader('Cache-Control', 's-max-age=1, stale-while-revalidate');
     res.send(episodios);
 });
-
-app.get('/api/item/:slug', (req, res) => {
-  const { slug } = req.params;
-  res.end(`Item: ${slug}`);
-});
-
 module.exports = app;
 
 /*
