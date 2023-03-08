@@ -1,4 +1,5 @@
 {
-    "rewrites": [{ "source": "/episodios/(.*)", "destination": "/episodios" },
-    { "source": "/api/(.*)", "destination": "/api" }]
+    "rewrites": [
+        { "source": "/episodios/(.*)", "destination": "/episodios" },
+        { "source": "/api/(.*)", "destination": "/api" }]
 }
