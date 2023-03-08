@@ -1,14 +1,9 @@
-const app = require('express')()
-const cors = require('cors')
-app.use(express.json()) // for parsing application/json
-app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
-app.use(cors())
-/*
 
+const app = require('express')();
+const { v4 } = require('uuid');
 
-*/
-app.get('/episodios', function(req, res){
-     let episodios = [
+app.get('/episodios', (req, res) => {
+    let episodios = [
         {	
 			anime: {
 				nome_anime:" Fumetsu no Anata e 2 – Episódios 16 & 17",
@@ -65,7 +60,28 @@ app.get('/episodios', function(req, res){
 
     episodios = episodios.concat(episodios)
     episodios = episodios.concat(episodios)
-    res.send(episodios)
+    
+    res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Cache-Control', 's-max-age=1, stale-while-revalidate');
+    res.send(episodios);
+});
+
+app.get('/api/item/:slug', (req, res) => {
+  const { slug } = req.params;
+  res.end(`Item: ${slug}`);
+});
+
+module.exports = app;
+
+/*
+
+const app = require('express')()
+const cors = require('cors')
+app.use(express.json()) // for parsing application/json
+app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+app.use(cors())
+app.get('/episodios', function(req, res){
+     
 });
 
 //The 404 Route (ALWAYS Keep this as the last route)
@@ -77,4 +93,4 @@ app.post('*', function(req, res){
   res.end({"message": "Endpoint não encontrado!", "code": 502})
 });
 
-module.exports = app;
+module.exports = app;*/
