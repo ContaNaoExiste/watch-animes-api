@@ -8,6 +8,9 @@ app.use(cors())
 
 */
 app.get('/episodios', function(req, res){
+    res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Cache-Control', 's-max-age=1, stale-while-revalidate');
+  
      let episodios = [
         {	
 			anime: {
