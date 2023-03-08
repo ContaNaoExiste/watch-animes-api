@@ -1,11 +1,12 @@
 const app = require('express')()
 const cors = require('cors')
-
-app.use(cors())
-
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+app.use(cors())
+/*
 
+
+*/
 app.get('/episodios', function(req, res){
      let episodios = [
         {	
@@ -64,9 +65,9 @@ app.get('/episodios', function(req, res){
 
     episodios = episodios.concat(episodios)
     episodios = episodios.concat(episodios)
-    res.end(episodios)
+    res.send(episodios)
 });
-
+/*
 //The 404 Route (ALWAYS Keep this as the last route)
 app.get('*', function(req, res){
   res.end({"message": "Endpoint não encontrado!", "code": 502})
@@ -74,6 +75,6 @@ app.get('*', function(req, res){
 
 app.post('*', function(req, res){
   res.end({"message": "Endpoint não encontrado!", "code": 502})
-});
+});*/
 
 module.exports = app;
