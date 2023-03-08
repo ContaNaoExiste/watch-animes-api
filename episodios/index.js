@@ -8,9 +8,6 @@ app.use(cors())
 
 */
 app.get('/episodios', function(req, res){
-    res.setHeader('Content-Type', 'application/json');
-    res.setHeader('Cache-Control', 's-max-age=1, stale-while-revalidate');
-  
      let episodios = [
         {	
 			anime: {
@@ -70,7 +67,7 @@ app.get('/episodios', function(req, res){
     episodios = episodios.concat(episodios)
     res.send(episodios)
 });
-/*
+
 //The 404 Route (ALWAYS Keep this as the last route)
 app.get('*', function(req, res){
   res.end({"message": "Endpoint não encontrado!", "code": 502})
@@ -78,6 +75,6 @@ app.get('*', function(req, res){
 
 app.post('*', function(req, res){
   res.end({"message": "Endpoint não encontrado!", "code": 502})
-});*/
+});
 
 module.exports = app;
