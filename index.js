@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const cors = require('cors')
-const port = 3050;
+//const port = 3050;
 
 app.use(cors())
 
@@ -78,6 +78,8 @@ app.post('*', function(req, res){
   res.send({"message": "Endpoint não encontrado!", "code": 502})
 });
 
+module.exports = app;
+/*
 app.listen(port, () => {
     console.log(`API iniciada na porta ${port}`)
-})
+})*/
