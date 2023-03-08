@@ -1,7 +1,5 @@
-const express = require('express');
-const app = express();
+const app = require('express')()
 const cors = require('cors')
-//const port = 3050;
 
 app.use(cors())
 
@@ -66,20 +64,16 @@ app.get('/episodios', function(req, res){
 
     episodios = episodios.concat(episodios)
     episodios = episodios.concat(episodios)
-  res.send(episodios)
+    res.end(episodios)
 });
 
 //The 404 Route (ALWAYS Keep this as the last route)
 app.get('*', function(req, res){
-  res.send({"message": "Endpoint não encontrado!", "code": 502})
+  res.end({"message": "Endpoint não encontrado!", "code": 502})
 });
 
 app.post('*', function(req, res){
-  res.send({"message": "Endpoint não encontrado!", "code": 502})
+  res.end({"message": "Endpoint não encontrado!", "code": 502})
 });
 
 module.exports = app;
-/*
-app.listen(port, () => {
-    console.log(`API iniciada na porta ${port}`)
-})*/
