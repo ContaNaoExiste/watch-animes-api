@@ -10,7 +10,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/episodios', (req, res) => {
-  let rawdata = fs.readFileSync( path.resolve("database", "animes", "243_seiin_koukou_danshi_volleybu.json")) 
+  let rawdata = fs.readFileSync( path.resolve("database", "teste", "zatch_bell.json")) 
   let json = JSON.parse(rawdata)
   res.send(json)
 })
