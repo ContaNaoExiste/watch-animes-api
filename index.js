@@ -36,38 +36,11 @@ function createDatabaseLocal(){
     res.send(error)
   }
 }
-createDatabaseLocal()
-app.get('/anime/:imdb', (req, res) => {
-  try {
-    res.send(DATABASE_ANIMES[req.params.imdb])
-  } catch (error) {
-   
-    res.send(error) 
-  }
-})
 
 function searchText(query, text){
   return query.includes(text)
 }
 
-app.get('/search/:q', (req, res) => {
-  try {
-    let animes = Object.values(DATABASE_ANIMES).filter(anime => searchText(req.params.q, anime.imdb.title))
-    if( animes.length > 0){
-      res.send({ 
-        animes: animes
-      })
-    }else{
-      res.send({ 
-        message: "Nenhum anime encontrado!"
-      })
-    }
-    
-  } catch (error) {
-   
-    res.send(error) 
-  }
-})
 
 function compareRatingStar(a, b) {
   if (a.imdb.rating_star < b.imdb.rating_star) {
@@ -89,6 +62,29 @@ function compareRatingCount(a, b) {
   // a must be equal to b
   return 0;
 }
+
+createDatabaseLocal()
+
+app.get('/anime/:imdb', (req, res) => {
+  try {
+    res.send(DATABASE_ANIMES[req.params.imdb])
+  } catch (error) {
+   
+    res.send(error) 
+  }
+})
+
+app.get('/search/:q', (req, res) => {
+  try {
+    let animes = Object.values(DATABASE_ANIMES).filter(anime => searchText(req.params.q, anime.imdb.title))
+    res.send({ 
+      animes: animes
+    })
+    
+  } catch (error) {
+    res.send(error) 
+  }
+})
 
 app.get('/index/popular', (req, res) => {
   let animes = Object.values(DATABASE_ANIMES).sort(compareRatingStar).slice(0, 6)
