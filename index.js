@@ -76,16 +76,22 @@ app.get('/anime/:imdb', (req, res) => {
 
 app.get('/search/:q', (req, res) => {
   try {
-    let animes = Object.values(DATABASE_ANIMES).filter(anime => searchText(req.params.q, anime.imdb.title))
-    res.send({ 
-      animes: animes
-    })
-    
+    res.send( { q: req.params.q })
   } catch (error) {
     res.send(error) 
   }
 })
-
+/*app.get('/search/:q', (req, res) => {
+  try {
+    let animes = Object.values(DATABASE_ANIMES).filter(anime => searchText(req.params.q, anime.imdb.title))
+    res.send({ 
+      animes: animes
+    })
+  } catch (error) {
+    res.send(error) 
+  }
+})
+*/
 app.get('/index/popular', (req, res) => {
   let animes = Object.values(DATABASE_ANIMES).sort(compareRatingStar).slice(0, 6)
   
