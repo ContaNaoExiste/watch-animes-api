@@ -72,8 +72,6 @@ function compareRatingStar(a, b) {
   return 0;
 }
 
-search
-
 function compareRatingCount(a, b) {
   if (a.imdb.rating_count < b.imdb.rating_count) {
     return -1;
