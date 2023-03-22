@@ -38,7 +38,7 @@ function createDatabaseLocal(){
 }
 
 function searchText(query, text){
-  return query.includes(text)
+  return query.toLowerCase().includes(text.toLowerCase())
 }
 
 
@@ -76,7 +76,19 @@ app.get('/anime/:imdb', (req, res) => {
 
 app.get('/search/:query', (req, res) => {
   try {
-    let animes = Object.values(DATABASE_ANIMES).filter(anime => searchText(req.params.query, anime.imdb.title))
+    let animes_id = Object.values(DATABASE_ANIMES).filter(anime => searchText(req.params.query, anime.imdb.title))
+    let animes = []
+    animes_id.forEach(element => {
+      animes.push( {
+        imdb : {
+          image: element.imdb.image,
+          id: element.imdb.id,
+          title: element.imdb.title,
+          genre: element.imdb.genre
+        }
+      })
+    });
+
     res.send({ 
       animes: animes
     })
