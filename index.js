@@ -46,6 +46,22 @@ app.get('/anime/:imdb', (req, res) => {
   }
 })
 
+function searchText(query, text){
+  return text.includes(query)
+}
+
+app.get('/anime/search/:q', (req, res) => {
+  try {
+    let animes = Object.values(DATABASE_ANIMES[req.params.imdb]).filter(anime => searchText(req.params.q, anime.imdb.title))
+    res.send({ 
+      animes: animes
+    })
+  } catch (error) {
+   
+    res.send(error) 
+  }
+})
+
 function compareRatingStar(a, b) {
   if (a.imdb.rating_star < b.imdb.rating_star) {
     return -1;
@@ -55,6 +71,8 @@ function compareRatingStar(a, b) {
   }
   return 0;
 }
+
+search
 
 function compareRatingCount(a, b) {
   if (a.imdb.rating_count < b.imdb.rating_count) {
