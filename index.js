@@ -35,15 +35,41 @@ app.get('/anime/:imdb', (req, res) => {
   }
 })
 
+function compareRatingStar(a, b) {
+  if (a.imdb.rating_star < b.imdb.rating_star) {
+    return -1;
+  }
+  if (a.imdb.rating_star > b.imdb.rating_star) {
+    return 1;
+  }
+  return 0;
+}
+
+function compareRatingCount(a, b) {
+  if (a.imdb.rating_count < b.imdb.rating_count) {
+    return -1;
+  }
+  if (a.imdb.rating_count > b.imdb.rating_count) {
+    return 1;
+  }
+  // a must be equal to b
+  return 0;
+}
+
 app.get('/index/popular', (req, res) => {
-  let rawdata = fs.readFileSync( path.resolve("database", "teste", "zatch_bell.json")) 
-  let json = JSON.parse(rawdata)
+  let animes = Object.values(DATABASE_ANIMES).sort(compareRatingStar).slice(0, 6)
+  
   let popular = {
-    animes:[
-      json,
-      json, 
-      json
-    ]
+    animes: animes
+  }
+  res.send(popular)
+})
+
+app.get('/index/trending', (req, res) => {
+  let animes = Object.values(DATABASE_ANIMES).sort(compareRatingCount).slice(0, 6)
+  
+  let popular = {
+    animes: animes
   }
   res.send(popular)
 })
