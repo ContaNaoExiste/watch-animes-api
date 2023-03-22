@@ -74,13 +74,16 @@ app.get('/anime/:imdb', (req, res) => {
   }
 })
 
-app.get('/search/:q', (req, res) => {
-  try {
-    res.send( { q: req.params.q })
-  } catch (error) {
-    res.send(error) 
+app.get('/search', (req, res) => {
+  let categorias = Object.keys(DATABASE_CATEGORIAS)
+  
+  let json = {
+    categorias: categorias
   }
+  res.send(json)
 })
+
+
 /*app.get('/search/:q', (req, res) => {
   try {
     let animes = Object.values(DATABASE_ANIMES).filter(anime => searchText(req.params.q, anime.imdb.title))
