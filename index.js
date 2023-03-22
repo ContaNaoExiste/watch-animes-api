@@ -99,10 +99,19 @@ app.get('/genre/:genre', (req, res) => {
     let animes = []
     let animes_id = DATABASE_CATEGORIAS[req.params.genre]
     animes_id.forEach(element => {
-      animes.push( DATABASE_ANIMES[element])
+      let anime = DATABASE_ANIMES[element]
+      animes.push( {
+        imdb : {
+          image: anime.imdb.image,
+          id: anime.imdb.id,
+          title: anime.imdb.title,
+          genre: anime.imdb.genre
+        }
+      })
     });
     let json = {
-      animes: animes
+      animes: animes,
+      genre: req.params.genre
     }
     res.send(json)  
   } catch (error) {
