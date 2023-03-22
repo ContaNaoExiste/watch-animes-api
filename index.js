@@ -53,9 +53,16 @@ function searchText(query, text){
 app.get('/anime/search/:q', (req, res) => {
   try {
     let animes = Object.values(DATABASE_ANIMES).filter(anime => searchText(req.params.q, anime.imdb.title))
-    res.send({ 
-      animes: animes
-    })
+    if( animes.length){
+      res.send({ 
+        animes: animes
+      })
+    }else{
+      res.send({ 
+        message: "Nenhum anime encontrado!"
+      })
+    }
+    
   } catch (error) {
    
     res.send(error) 
