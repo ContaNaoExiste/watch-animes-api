@@ -75,19 +75,8 @@ app.get('/anime/:imdb', (req, res) => {
 })
 
 app.get('/search/:query', (req, res) => {
-  let categorias = Object.keys(DATABASE_CATEGORIAS)
-  
-  let json = {
-    categorias: categorias,
-    q: req.params.query
-  }
-  res.send(json)
-})
-
-
-/*app.get('/search/:q', (req, res) => {
   try {
-    let animes = Object.values(DATABASE_ANIMES).filter(anime => searchText(req.params.q, anime.imdb.title))
+    let animes = Object.values(DATABASE_ANIMES).filter(anime => searchText(req.params.query, anime.imdb.title))
     res.send({ 
       animes: animes
     })
@@ -95,7 +84,7 @@ app.get('/search/:query', (req, res) => {
     res.send(error) 
   }
 })
-*/
+
 app.get('/index/popular', (req, res) => {
   let animes = Object.values(DATABASE_ANIMES).sort(compareRatingStar).slice(0, 6)
   
