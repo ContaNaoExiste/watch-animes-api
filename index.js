@@ -9,6 +9,8 @@ app.use(express.urlencoded({ extended: true })) // for parsing application/x-www
 app.use(cors())
 
 const DATABASE_ANIMES = {}
+const DATABASE_EPISODIOS = {}
+const DATABASE_CATEGORIAS = {}
 
 function createDatabaseLocal(){
   try {
@@ -19,10 +21,19 @@ function createDatabaseLocal(){
         let json = JSON.parse(rawdata)
   
         DATABASE_ANIMES[json.warezcdn.imdb] = json
+
+        if(json.imdb.genre){
+          json.imdb.genre.split("").forEach(genre => {
+            if( ! DATABASE_CATEGORIAS[genre])
+              DATABASE_CATEGORIAS[genre] = []
+
+              DATABASE_CATEGORIAS[genre].push(json.warezcdn.imdb)
+          });
+        }
       });
     }  
   } catch (error) {
-    
+    res.send(error)
   }
 }
 createDatabaseLocal()
@@ -72,6 +83,32 @@ app.get('/index/trending', (req, res) => {
     animes: animes
   }
   res.send(popular)
+})
+
+app.get('/genres', (req, res) => {
+  let categorias = Object.keys(DATABASE_CATEGORIAS)
+  
+  let json = {
+    categorias: categorias
+  }
+  res.send(json)
+})
+
+app.get('/genre/:genre', (req, res) => {
+  try {
+    let animes = []
+    let animes_id = DATABASE_CATEGORIAS[req.params.genre]
+    animes_id.forEach(element => {
+      animes.push( DATABASE_ANIMES[element])
+    });
+    let json = {
+      animes: animes
+    }
+    res.send(json)  
+  } catch (error) {
+    res.send(error)
+  }
+  
 })
 
 app.get('*', (req, res) => {
