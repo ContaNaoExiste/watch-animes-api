@@ -47,7 +47,7 @@ app.get('/anime/:imdb', (req, res) => {
 })
 
 function searchText(query, text){
-  return text.includes(query)
+  return query.includes(text)
 }
 
 app.get('/anime/search/:q', (req, res) => {
