@@ -76,9 +76,9 @@ app.get('/anime/:imdb', (req, res) => {
 
 app.get('/search/:query', (req, res) => {
   try {
-    let animes = Object.values(DATABASE_ANIMES).filter(anime => searchText(req.params.query, anime.imdb.title))
+    //let animes = Object.values(DATABASE_ANIMES).filter(anime => searchText(req.params.query, anime.imdb.title))
     res.send({ 
-      animes: animes
+      animes: "animes"
     })
   } catch (error) {
     res.send(error) 
