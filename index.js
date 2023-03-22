@@ -65,7 +65,7 @@ app.get('/anime/search/:q', (req, res) => {
     
   } catch (error) {
    
-    res.send(error.message) 
+    res.send({error: error}) 
   }
 })
 
