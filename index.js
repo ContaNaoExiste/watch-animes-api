@@ -74,11 +74,12 @@ app.get('/anime/:imdb', (req, res) => {
   }
 })
 
-app.get('/search', (req, res) => {
+app.get('/search/:q', (req, res) => {
   let categorias = Object.keys(DATABASE_CATEGORIAS)
   
   let json = {
-    categorias: categorias
+    categorias: categorias,
+    q: req.params.q
   }
   res.send(json)
 })
