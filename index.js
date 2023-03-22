@@ -53,7 +53,7 @@ function searchText(query, text){
 app.get('/anime/search/:q', (req, res) => {
   try {
     let animes = Object.values(DATABASE_ANIMES).filter(anime => searchText(req.params.q, anime.imdb.title))
-    if( animes.length){
+    if( animes.length > 0){
       res.send({ 
         animes: animes
       })
@@ -65,7 +65,7 @@ app.get('/anime/search/:q', (req, res) => {
     
   } catch (error) {
    
-    res.send(error) 
+    res.send(error.message) 
   }
 })
 
