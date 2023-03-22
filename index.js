@@ -38,7 +38,7 @@ function createDatabaseLocal(){
 }
 
 function searchText(query, text){
-  return query.toLowerCase().includes(text.toLowerCase())
+  return text.toLowerCase().includes(query.toLowerCase())
 }
 
 
