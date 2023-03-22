@@ -52,7 +52,7 @@ function searchText(query, text){
 
 app.get('/anime/search/:q', (req, res) => {
   try {
-    let animes = Object.values(DATABASE_ANIMES[req.params.imdb]).filter(anime => searchText(req.params.q, anime.imdb.title))
+    let animes = Object.values(DATABASE_ANIMES).filter(anime => searchText(req.params.q, anime.imdb.title))
     res.send({ 
       animes: animes
     })
