@@ -23,7 +23,7 @@ function createDatabaseLocal(){
         DATABASE_ANIMES[json.warezcdn.imdb] = json
 
         if(json.imdb.genre){
-          json.imdb.genre.split("").forEach(genre => {
+          json.imdb.genre.split(",").forEach(genre => {
             if( ! DATABASE_CATEGORIAS[genre])
               DATABASE_CATEGORIAS[genre] = []
 
