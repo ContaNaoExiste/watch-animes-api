@@ -6,12 +6,16 @@ const helmet = require("helmet")
 const hpp = require('hpp')
 const { logError } = require('./utils/error')
 const app = express()
-
+const cors = require('cors')
 
 function init() {
     app.use(helmet())
+    app.use(express.json()) // for parsing application/json
     app.use(bodyParser.json())
     app.use(hpp())
+    app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+    app.use(cors())
+
     initRoutes(app)
 
     /*    
