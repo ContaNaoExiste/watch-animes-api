@@ -140,7 +140,7 @@ function getListAnimes( ){
 
 function getListAnimesSlideShow(){
 
-    return {}
+    return getListAnimesBySearch("black")
 }
 
 module.exports = {
