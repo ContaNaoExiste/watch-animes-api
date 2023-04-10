@@ -40,6 +40,9 @@ function reduceInfoAnime( json ){
             genre: json.imdb.genre,
             plot: json.imdb.plot,
             genres: (json.imdb.genre || []).split(",") 
+        },
+        warezcdn:{
+            href: json.warezcdn.href
         }
     }
 }
