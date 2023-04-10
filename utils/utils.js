@@ -34,7 +34,7 @@ function compareRatingCount(a, b) {
 function reduceInfoAnime( json ){
     return {
         imdb: {
-            image: json.imdb.image || path.resolve("images", "not_found.png"),
+            image: json.imdb.image,
             id: json.imdb.id,
             title: json.imdb.title,
             genre: json.imdb.genre,
