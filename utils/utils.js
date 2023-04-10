@@ -38,6 +38,7 @@ function reduceInfoAnime( json ){
             id: json.imdb.id,
             title: json.imdb.title,
             genre: json.imdb.genre,
+            plot: json.imdb.plot,
             genres: (json.imdb.genre || []).split(",") 
         }
     }
