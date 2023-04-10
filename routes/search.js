@@ -1,6 +1,6 @@
 const express = require('express')
 const { getListAnimesBySearch } = require('../utils/utils')
-const { logError } = require('../Utils/error')
+const { logError } = require('../utils/error')
 const router = express.Router()
 
 function init() {
