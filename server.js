@@ -39,7 +39,6 @@ function initRoutes(app) {
         })
     } catch (error) { logError(error, __filename) }
 }
+init()
 
-module.exports = {
-    init
-}
+module.exports = app
