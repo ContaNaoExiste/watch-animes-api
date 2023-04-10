@@ -22,6 +22,8 @@ function init() {
     app.get('*', (req, res) => {
         res.status(404).send({message: 'Endpoint não configurado!', error: 404})
     })
+
+    return app
 }
 
 function initRoutes(app) {
@@ -39,6 +41,7 @@ function initRoutes(app) {
         })
     } catch (error) { logError(error, __filename) }
 }
-init()
 
-module.exports = app
+module.exports = {
+    init
+}
