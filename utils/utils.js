@@ -133,9 +133,7 @@ function getAnimeByIMDB( imdb ){
     const anime = animes[imdb]
     if( ! anime) return {}
 
-    return {
-        anime: anime
-    } 
+    return anime
 }
 
 function getListAnimes( ){
