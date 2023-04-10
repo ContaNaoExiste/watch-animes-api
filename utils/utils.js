@@ -37,6 +37,7 @@ function reduceInfoAnime( json ){
             image: json.imdb.image || path.resolve("images", "not_found.png"),
             id: json.imdb.id,
             title: json.imdb.title,
+            genre: json.imdb.genre,
             genres: (json.imdb.genre || []).split(",") 
         }
     }
