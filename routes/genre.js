@@ -22,6 +22,15 @@ function init() {
             res.send(error)
         }
     })
+    
+    router.get('/genre/:genre', (req, res) => {
+        try {
+            res.send(getListAnimesByGenre(req.params.genre))  
+        } catch (error) {
+            logError(error, __filename)
+            res.send(error)
+        }
+    })
 }
 
 module.exports = {
