@@ -18,8 +18,7 @@ function init() {
 
     initRoutes(app)
 
-    /*    
-    app.listen("5025", () => {
+    /*app.listen("5025", () => {
         console.log(`Server UP on port 5025`)
     })*/
     

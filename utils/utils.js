@@ -9,7 +9,6 @@ function searchText(query, text){
     return text.toLowerCase().includes(query.toLowerCase())
 }
   
-  
 function compareRatingStar(a, b) {
     if (a.imdb.rating_star < b.imdb.rating_star) {
         return -1;
@@ -43,7 +42,8 @@ function reduceInfoAnime( json ){
         },
         warezcdn:{
             href: json.warezcdn.href
-        }
+        },
+        last_episode: getLastEpisodePublished(json)
     }
 }
 
@@ -145,6 +145,71 @@ function getListAnimesSlideShow(){
     return getListAnimesBySearch("black")
 }
 
+function getListAnimesRecentlyAdded(){
+    const animes = localStorage.getItem(STR_DATABASE_ANIMES)
+    if( ! animes) return null
+    
+    let animes_sort = Object.values(animes).filter( element => (element.imdb.seasons || []).length > 0).sort(comparePublishedDate)
+    animes_sort = (animes_sort.length > 10) ? animes_sort.slice(0, 10) : animes_sort
+    
+    return {
+        animes: animes_sort.map( element => reduceInfoAnime(element))
+    }
+}
+
+function comparePublishedDate(a, b) {
+    const ep_a = getDateLastEpisodePublished( a )
+    const ep_b = getDateLastEpisodePublished( b )
+
+    if( ep_a != null && ep_b != null){
+        if( ep_a < ep_b){
+            return 1
+        } else if( ep_a > ep_b){
+            return -1
+        }else{
+            return 0
+        }
+    }
+    return 1
+}
+
+function getDateLastEpisodePublished(json){
+    let last_episode = null
+
+    if( json.imdb && json.imdb.seasons){
+        for (const season of json.imdb.seasons) {
+            if( season.episodes){
+                for (const episode of season.episodes) {
+                    let published = Date.parse(episode.publishedDate)
+                    if( last_episode == null || last_episode < published){
+                        last_episode = episode
+                    }
+                }
+            }
+        }
+    }
+    return last_episode
+}
+
+function getLastEpisodePublished(json){
+    let last_episode = null
+    let obj_episode= null
+    if( json.imdb && json.imdb.seasons){
+        for (const season of json.imdb.seasons) {
+            if( season.episodes){
+                for (const episode of season.episodes) {
+                    let published = Date.parse(episode.publishedDate)
+                    if( last_episode == null || last_episode < published){
+                        last_episode = published
+                        obj_episode  = episode
+                    }
+                }
+            }
+        }
+    }
+    return obj_episode
+}
+
 module.exports = {
     loadLocalDatabase,
     getListGenres,
@@ -152,5 +217,6 @@ module.exports = {
     getListAnimesBySearch,
     getAnimeByIMDB,
     getListAnimes,
-    getListAnimesSlideShow
+    getListAnimesSlideShow,
+    getListAnimesRecentlyAdded
 }
