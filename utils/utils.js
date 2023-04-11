@@ -124,7 +124,7 @@ function getListAnimesBySearch(query){
     }
 }
 
-function getAnimeByIMDB( imdb ){
+function getAnimeByIMDB( imdb , season, episode){
     if( ! imdb) return {}
     
     const animes =  localStorage.getItem(STR_DATABASE_ANIMES)
@@ -132,6 +132,9 @@ function getAnimeByIMDB( imdb ){
     
     const anime = animes[imdb]
     if( ! anime) return {}
+    if( season && episode){
+        anime.warezcdn.href += `/${season}/${episode}`
+    }
 
     return anime
 }

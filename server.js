@@ -18,9 +18,9 @@ function init() {
 
     initRoutes(app)
 
-    /*app.listen("5025", () => {
+    app.listen("5025", () => {
         console.log(`Server UP on port 5025`)
-    })*/
+    })
     
     app.get('*', (req, res) => {
         res.status(404).send({message: 'Endpoint não configurado!', error: 404})
